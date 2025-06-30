@@ -1,0 +1,145 @@
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+
+
+// Run code and hover over the points at x = 6.
+// For six elements, how long will it take 
+// for the linear, squared, and exponential functions?
+// Which is the most efficient? Is there much difference?
+
+// How about at x = 10? Can we live with the time it takes
+// for each of these searches to return a result?
+// Is there a point when the time will be too long for
+// each of these searches?
+
+
+
+var x = 1;
+var xConstant = x;
+var xLinear = x;
+var xSquared = x;
+var xExp = x;
+
+var myChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    datasets: [{
+      label: 'Linear',
+      fill: false,
+      data: [,{
+        x: 0,
+        y: (x * xLinear)
+      }, {
+        x: xLinear += 5,
+        y: (x * xLinear)
+      }, {
+        x: xLinear += 4,
+        y: (x * xLinear)
+      }, {
+        x: xLinear += 5,
+        y: (x * xLinear)
+      },{
+        x: xLinear += 5,
+        y: (x * xLinear)
+      }, {
+        x: xLinear += 5,
+        y: (x * xLinear)
+      },{
+        x: xLinear += 5,
+        y: (x * xLinear)
+      }, {
+        x: xLinear += 5,
+        y: (x * xLinear)
+      }, {
+        x: xLinear += 5,
+        y: (x * xLinear)
+      }],
+      borderColor: 'blue',
+      backgroundColor: 'blue',
+      borderWidth: 1
+    },
+    {
+      label: 'Squared',
+      fill: false,
+      data: [,{
+        x: 0,
+        y: Math.pow(xSquared,2)
+      }, {
+        x: xSquared = 6,
+        y: Math.pow(xSquared,2)
+      }, {
+        x: xSquared = 10,
+        y: Math.pow(xSquared,2)
+      }, {
+        x: xSquared = 20,
+        y: Math.pow(xSquared,2)
+      }, {
+        x: xSquared = 30,
+        y: Math.pow(xSquared,2)
+      },{
+        x: xSquared = 40,
+        y: Math.pow(xSquared,2)
+      }],
+      borderColor: 'green',
+      backgroundColor: 'green',
+      borderWidth: 1
+    },
+    {
+      label: 'Exponential',
+      fill: false,
+      data: [,{
+        x: 0,
+        y: Math.pow(2,xExp)
+      }, {
+        x: xExp = 6,
+        y: Math.pow(2,xExp)
+      }, {
+        x: xExp = 8,
+        y: Math.pow(2,xExp)
+      }, {
+        x: xExp = 10,
+        y: Math.pow(2,xExp)
+      }, {
+        x: xExp = 12,
+        y: Math.pow(2,xExp)
+      }],
+      borderColor: 'red',
+      backgroundColor: 'red',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      xAxes: [{
+        type: 'linear',
+        position: 'bottom',
+        ticks: {
+          min: 0,
+          max: 40,
+          stepSize: 5,
+          fixedStepSize: 1,
+        },
+        scaleLabel: {
+        display: true,
+        labelString: 'Number of elements (in thousands)'
+      },
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0,
+          max: 1500,
+          stepSize: 200,
+          fixedStepSize: 10,
+        },
+        scaleLabel: {
+        display: true,
+        labelString: 'Time (milliseconds)'
+      },
+      }]
+    }
+  }
+});
+
+</script>

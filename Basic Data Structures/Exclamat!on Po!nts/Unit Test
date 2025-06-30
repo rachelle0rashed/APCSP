@@ -1,0 +1,15 @@
+# update this function so it replaces all lowercase 'i's in `text` with '!'
+
+text = "I like ice cream."
+
+def exclamations(text):
+    my_list = list(text)
+    space = ""
+    for item in my_list:
+        if item == "i":
+            space = space + "!"
+        else:
+            space = space + item
+    return space
+
+print(exclamations(text))

@@ -1,0 +1,6 @@
+# fill in this function to return the total of the three judges' scores!
+
+def calculate_score(judges_score):
+    return (judges_score[0] + judges_score[1] + judges_score[2])
+    
+print(calculate_score((10,10,10)))

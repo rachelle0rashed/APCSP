@@ -1,0 +1,2 @@
+The use of data abstraction manage complexity in program code by making things easier by hiding the specific of how data stored or organize, so you only see what’s important.
+Using lists make a program easier to develop and maintain by organizing data in a simplier way, making it easier to allow changes.

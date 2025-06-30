@@ -1,0 +1,6 @@
+# fill in this function to return a list ontaining each character in the name
+def spell_name(name):
+    name_list = list(name)
+    return name_list
+    
+print(spell_name("Jessica"))
