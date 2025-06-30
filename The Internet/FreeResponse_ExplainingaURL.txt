@@ -1,0 +1,4 @@
+Domain: www.example.com
+Path : /homepage.html
+My browser sends a request to www.example.com. The web server recevies it and responds with the requested webpage. 
+My brower requests "/homepage.html" from the website, and the server sends back the homepage.

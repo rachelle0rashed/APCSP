@@ -1,0 +1,11 @@
+def remove_all_from_string(word, letter):
+	result = ""
+	index = 0 
+	while True:
+	    find_let = word.find(letter, index)
+	    if find_let == -1:
+	        result += word[index:]
+	        break
+	    result += word[index:find_let]
+	    index = find_let + 1
+	return result

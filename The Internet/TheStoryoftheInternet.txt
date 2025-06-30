@@ -1,0 +1,5 @@
+Type the URL: You want to see an image of Karel the dog, so you type https://codehs.com/static/img/karel.png into your web browser.
+Finding the server: Your browser doesn’t know where the image is yet so it asks the Internet's DNS (like a library for the internet) to find the IP address for "codehs.com."
+Browser sends a request: The browser sends a request to the server at that IP address, asking for the image or page you want to see.
+Server sends the image: The server at CodeHS finds the image and sends it back to your browser in small pieces called packets.
+Putting it together: Your browser puts the pieces back together and shows you the image of Karel on your screen.

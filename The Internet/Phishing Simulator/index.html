@@ -1,0 +1,384 @@
+<!-----------------------------------------------------------------------
+
+Click Run Code or See HTML in new window.
+Click on each email and decide whether it is a legit email or a 
+phising attempt. 
+
+Play with the app to find other surprises!
+
+------------------------------------------------------------------------>
+
+
+<html ng-app="ionicApp">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  
+  <title>Phishing</title>
+
+  <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+  <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+</head>
+
+<body>
+
+<ion-nav-view></ion-nav-view>
+
+<script id="app-menu.html" type="text/ng-template">
+    <ion-side-menus enable-menu-with-back-views="false">
+
+        <ion-side-menu-content>
+            <ion-nav-bar class="bar-positive">
+                <ion-nav-back-button class="button-icon ion-ios-arrow-left">
+                </ion-nav-back-button>
+
+                <ion-nav-buttons side="right">
+                    <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+                    </button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+
+            <ion-nav-view name="menuContent"></ion-nav-view>
+        </ion-side-menu-content>
+
+        <ion-side-menu side="right">
+            <ion-header-bar class="bar-assertive">
+                <h1 class="title">Folders</h1>
+            </ion-header-bar>
+            <ion-content>
+                <ul class="list">
+                    <!-- Note each link has the 'menu-close' attribute so the menu auto closes when clicking on one of these links -->
+                    <a href="#/app/emails/inbox" class="item" menu-close>
+                        Inbox
+                        <span class="badge badge-assertive">{{data.inboxCount}}</span>
+                    </a>
+                    <a href="#/app/emails/sent" class="item" menu-close>
+                      Sent
+                      <span class="badge badge-assertive">{{data.sentCount}}</span>
+                    </a>
+                </ul>
+            </ion-content>
+        </ion-side-menu>
+        
+    </ion-side-menus>
+</script>
+
+<script id="email-list.html" type="text/ng-template">
+    <ion-view view-title={{data.title}}>
+
+        <ion-nav-buttons side="primary">
+            <button class="button button-icon icon ion-ios-minus-outline" ng-click="data.showDelete = !data.showDelete"></button>
+        </ion-nav-buttons>
+
+        <ion-content>
+            <ion-list show-delete="data.showDelete">
+
+                <ion-item ng-repeat="email in emails" class="item-icon-left item-remove-animate" href="#/app/emails/{{data.mode}}/{{email.id}}">
+                    <i class="icon" ng-class="{'ion-ios-email-outline': email.was_read, 'ion-ios-email energized': !email.was_read}"></i>
+                    <h2>{{email.from}}</h2>
+                    <p>
+                        <span class="email-text">
+                        {{email.subject}}
+                        </span>
+                        <span class="item-note email-text">
+                        {{email.date | date:'EEE M/d/yyyy h:mm a'}}
+                        </span>
+                    </p>
+                    <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(email)">
+                    </ion-delete-button>
+                </ion-item>
+
+            </ion-list>
+        </ion-content>
+    </ion-view>
+</script>
+
+<script id="email-view.html" type="text/ng-template">
+    <ion-view view-title="E-Mail">
+      <ion-content>
+
+        <div class="list card">
+
+            <ion-item class="item-icon-left">
+                <i class="icon ion-ios-email-outline"></i>
+                <h2>{{email.from}}</h2>
+                <p>
+                    <span class="email-text">
+                    {{email.subject}}
+                    </span>
+                    <span class="item-note email-text">
+                    {{email.date | date:'EEE M/d/yyyy h:mm a'}}
+                    </span>
+                </p>
+            </ion-item>
+
+            <ion-item class="item-text-wrap email-body-text">
+                {{email.greeting}}
+                <br>
+                <br>
+                {{email.body}}
+            </ion-item>
+          
+            <ion-item class="item-text-wrap email-buttons">
+                <button id="green" onclick="download()"> {{email.downloadButton}} </button>
+                <button id="red" onclick="ignore()"> {{email.ignoreButton}} </button>
+                <div id="myDIV">
+                    <br>
+                    {{email.download}}
+                </div>
+                <div id="myDIV2">
+                    <br>
+                    {{email.ignore}}
+                </div>
+            </ion-item>
+
+        </div>
+      </ion-content>
+    </ion-view>
+</script>
+
+
+<script id="bloh.html" type="text/ng-template">
+    <ion-view view-title="E-Mail View">
+      <ion-content>
+        E-Mail View
+      </ion-content>
+    </ion-view>
+  </script>
+
+</body>
+
+</html>
+
+
+<script>
+angular.module('ionicApp', ['ionic'])
+
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+
+    $stateProvider
+        .state('appmenu', {
+            url: "/app",
+            abstract: true,
+            templateUrl: "app-menu.html",
+    	    controller: "EmailMenuCtrl"
+        })
+    .state('appmenu.email-list', {
+        url: "/emails/:mode",
+        views: {
+            'menuContent': {
+            templateUrl: "email-list.html",
+            controller: "EmailListCtrl"
+            }
+        }
+    })
+    .state('appmenu.email-view', {
+        url: "/emails/:mode/:id",
+        views: {
+            'menuContent': {
+                templateUrl: "email-view.html",
+                controller: "EmailViewCtrl"
+            }
+        }
+    })
+
+  $urlRouterProvider.otherwise("/app/emails/inbox");
+
+  $ionicConfigProvider.backButton.previousTitleText(false).text('');
+})
+
+
+.controller('EmailMenuCtrl', function($scope, EmailService) {
+    $scope.data = {
+        inboxCount: EmailService.getInboxEmailCount(),
+        sentCount: EmailService.getOutboxEmailCount()
+    };
+})
+.controller('EmailListCtrl', function($stateParams, $scope, EmailService) {
+
+  $scope.emails = [];
+
+  $scope.data = {
+        showDelete: false,
+        mode: $stateParams.mode,
+        title: ''
+    };
+
+$scope.setListData = function() {
+    switch ($stateParams.mode) {
+        case 'inbox':
+            $scope.data.title = 'Inbox - All';
+            $scope.emails = EmailService.getInboxEmails();
+            break;
+        case 'sent':
+            $scope.data.title = 'Sent';
+            $scope.emails = EmailService.getOutboxEmails();
+            break;
+        default:
+            $scope.data.title = 'E-Mails';
+        }
+    };
+
+$scope.setListData();
+
+$scope.onItemDelete = function(email) {
+        $scope.emails.splice($scope.emails.indexOf(email), 1);
+    };
+})
+
+.controller('EmailViewCtrl', function($stateParams, $scope, $timeout, EmailService) {
+    if ($stateParams.mode == 'sent') {
+        $scope.email = EmailService.getOutboxEmail($stateParams.id);
+    } else {
+        $scope.email = EmailService.getInboxEmail($stateParams.id);
+    }
+    $timeout(function() {
+        $scope.email.was_read = true;
+    }, 500);
+})
+
+.factory('EmailService', function() {
+    var inbox = [];
+    var outbox = [];
+
+  function readInboxEmails() {
+        if (inbox.length) {
+        return;
+        }
+    inbox = [{
+          id: 0,
+          subject: 'HR',
+          date: 'Wed 12/13/2019 3:59 PM',
+          from: 'HR (HR@xcodehs.com) ',
+          greeting: 'Hello',
+          body: 'Please download and sign the attached before noon for payroll to prevent delayed deposit.',
+          was_read: false,
+          download: 'You got phished! Check out the fake email addresss. They got you. All your computer information is now theirs.', 
+          ignore: 'Good job! This is a phishing email.',
+          downloadButton: 'Download',
+          ignoreButton: 'Ignore'
+    }, {
+          id: 1,
+          subject: 'Hey, did you get this?',
+          date: 'Tue 11/24/2019 1:46 PM',
+          from: 'Karel (karel@codehs.com)',
+          greeting: 'Hey Jackie!',
+          body: 'Did you see this new documentation for the last exercise? It\'s great!',
+          was_read: false,
+          download: 'You\'re good! You can probably trust Karel this time.',
+          ignore: 'There is probably no harm in this file!',
+          downloadButton: 'Download',
+          ignoreButton: 'Ignore'
+    }, {
+          id: 2,
+          subject: 'Jacqueline Joiner, Credit Card expiration date is approaching',
+          date: 'Sat 10/18/2019 12:17 PM',
+          from: 'PayPal (accountservices@paypall.com)',
+          greeting: 'Dear Jacqueline Joiner,',
+          body: 'The crdit card on file ending in ...4673 will expire soon. Please update the card information on file. Please log in to your PayPal account, follow the steps to update your credit card and click \'Save\'. Click below to log into your account. Thank you for using PayPal!',
+          was_read: false,
+          download: 'You got phished! There are multiple spelling/grammar errors and the email address is fake! They got you. All your computer information is now theirs.',
+          ignore: 'Good job! This is a phishing email.',
+          downloadButton: 'Click Link',
+          ignoreButton: 'Ignore'
+    }];
+  };
+
+  function readOutboxEmails() {
+        if (outbox.length) {
+        return;
+        }
+    outbox = [{
+          id: 0,
+          subject: 'Phishing Attempts',
+          date: 'Sun 9/24/2019 3:55 PM',
+          greeting:'Hey you!',
+          from: 'Karel',
+          body: 'Did you know that \'phishing\' is when someone sends you a fake email to try to steal your personal information?',
+          was_read: true
+    }, {
+          id: 1,
+          subject: 'Spear-Phishing',
+          date: 'Mon 8/05/2019 2:23 PM',
+          from: 'CodeHS',
+          greeting:'Another thing,',
+          body: 'Spear-phishing is when the email is sent to a specific individual to try to trick that one person. This is what happened in the Yahoo! attack.',
+          was_read: true
+    }, {
+          id: 2,
+          subject: 'What to do?!',
+          date: 'Tue 7/15/2019 5:47 AM',
+          from: 'Tracy',
+          greeting:'Did you know?',
+          body: 'The best way to prevent a phishing attempt is to be aware of and be able to recognize fake emails!',
+          was_read: true
+    }];
+  };
+
+  return {
+    getInboxEmailCount: function() {
+      readInboxEmails();
+      return inbox.length;
+    },
+    getOutboxEmailCount: function() {
+      readOutboxEmails();
+      return outbox.length;
+    },   
+    getInboxEmails: function() {
+      readInboxEmails();
+      return inbox;
+    },
+    getOutboxEmails: function() {
+      readOutboxEmails();
+      return outbox;
+    },
+    getInboxEmail: function(id) {
+      for (i = 0; i < inbox.length; i++) {
+        if (inbox[i].id == id) {
+          return inbox[i];
+        }
+      }
+      return null;
+    },
+    getOutboxEmail: function(id) {
+      for (i = 0; i < outbox.length; i++) {
+        if (outbox[i].id == id) {
+          return outbox[i];
+        }
+      }
+      return null;
+    }
+  }
+});
+
+function download() {
+
+var y = document.getElementById("myDIV2");
+  if (y.style.display === "block") {
+    y.style.display = "none";
+  }
+var x = document.getElementById("myDIV");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+
+function ignore() {
+
+var y = document.getElementById("myDIV");
+  if (y.style.display === "block") {
+    y.style.display = "none";
+  }
+var x = document.getElementById("myDIV2");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+</html>

@@ -1,0 +1,1 @@
+The routing system being redundant means that mutiple paths exists. Indivials routers can break, and the system work fine, maks the routing systems scalable. Added routers equal better performance a good thing for reliability.

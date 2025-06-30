@@ -1,0 +1,6 @@
+def contains_vowel(word):
+	vowels = "aeiou"
+	for i in word:
+	    if i in vowels:
+	        return True 
+	return False

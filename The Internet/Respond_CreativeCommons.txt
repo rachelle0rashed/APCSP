@@ -1,0 +1,7 @@
+CC BY – You can use, share, and change the work, even for money, as long as you give credit.
+CC BY-SA – Same as CC BY, but if you change it, you must use the same license.
+CC BY-ND – You can use and share it, even for money, but you can't change it.
+CC BY-NC – You can use, share, and change it, but not for money. Credit is required.
+CC BY-NC-SA – Same as CC BY-NC, but if you change it, you must use the same license.
+CC BY-NC-ND – You can only use and share it, not change it or use it for money. Credit is required.
+The most restrictive license is CC BY-NC-ND because you can only share the work without changes or making money from it. The least restrictive is CC BY because you can do anything with it as long as you give credit

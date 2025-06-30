@@ -1,0 +1,15 @@
+1. The program helps the user check if they have all the ingredients for pancakes. The user enters ingredients, and the program tells them if anything is missing from the pantry.
+
+2. Input: The user enters ingredients one by one (like "flour", "sugar", "eggs") and types "done" when finished.
+   Output: The program either lists the missing ingredients and tells the user to go shopping, or comfirms that the user has all the ingredients needed for the recipe.
+   
+3. Call: missing_food(extra_food)
+   a. First call: The argument will be the list of items that are already stored in the panty list. (Ex: flour, sugar, baking powder, salt, eggs, milk, butter)
+   b. Second call: The argument will be the list of items that aren't stored in the panty list. (Ex: chips, jelly)
+
+4.  Condition: if item not in pantry:
+    a. First call: The conditional statement “if item not in pantry:” is false since there are no items missing from the pantry.
+    b. Second call: The conditional statement “if item not in pantry:” is true since there are items missing from the pantry
+5. 
+    a. First call: When the ingredient is in the pantry, nothing happens, and the function moves on to the next item and informs the user that they have everything. 
+    b. Second call: When the ingredient isn’t in the pantry, it is added to the missing_ingredients list and informs the user about which ingredients they still need to buy

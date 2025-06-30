@@ -1,0 +1,1 @@
+IPv4 has a limited number of IP addresses for all the devices on the internet, and IPv6 gives us way more.

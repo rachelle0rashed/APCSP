@@ -1,0 +1,1 @@
+An IP address helps find and send data to the right device on the internet.

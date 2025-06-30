@@ -1,0 +1,221 @@
+<!-----------------------------------------------------------------------
+
+Click Run Code or See HTML in new window.
+
+Follow the directions on the website!
+
+------------------------------------------------------------------------>
+
+<html>
+
+<head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <style>
+            body {
+                height: 2000px;
+            }
+
+            #container {
+                padding: 1em;
+            }
+
+            button {
+                transition-property: box-shadow, width, height;
+                transition-duration: .1s, 3s, 5s;
+                background-color: lightGreen;
+            }
+        
+            button:hover {
+                box-shadow: 0px 0px 1px 0px black;
+                background-color:	#ADD8E6;
+            }
+
+            #paint-canvas {
+                background-color: beige;
+                height: 250px;
+                border: 1px solid gray;
+                margin: 2em;
+                box-shadow: 0px 5px 20px -9px black;
+            }
+        
+            .dot {
+                position: absolute;
+                height: 8px;
+                width: 8px;
+                border-radius: 50%;
+                background: blue;
+            }
+
+            #draggable-bar {
+                background-color: deepskyblue;
+            }
+        
+            .progress {
+                width: 100%;
+                position: fixed;
+                border-radius: 0px;
+                top: 0px;
+                height: 3px;
+            }
+
+            .progress>div {
+                height: 3px;
+                background: navy;
+                width: 0%;
+            }
+        
+            #mouse-tracker-x,
+            #mouse-tracker-y {
+                background-color: darkslateblue;
+                position: absolute;
+                pointer-events: none;
+            }
+        
+            #mouse-tracker-x {
+                width: 100%;
+                height: 1px;
+            }
+
+            #mouse-tracker-y {
+                height: 2000px;
+                /* body height */
+                width: 1px;
+            }
+  </style>
+</head>
+
+<body>
+        <div id="mouse-tracker-x"></div>
+        <div id="mouse-tracker-y"></div>
+        <div id="container">
+            On this page, you can see a target that tracks your mouse movements!<hr>
+            This button knows when you click it and when you just hover over it!<br><br>
+        <button id="my-button">I SEE YOU</button><hr>
+        <p>
+            You can press "B" to change the background to Blue.
+        </p><hr>
+        <p>
+            What you type on your keyboard will appear below. (This is kinda like keylogger)
+        </p>
+        <p id="keylogger"></p><hr>
+            Below is a canvas. It tracks your mouse movements as well. Click and drag your mouse inside of it!
+        <div id="paint-canvas"></div>
+        <div id="draggable-bar">
+            You can drag on me to change my width.
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var myButton = document.querySelector("#my-button");
+    myButton.addEventListener("contextmenu", function(e) {
+        e.preventDefault();    
+        myButton.innerHTML = "Ohh, clicking with the right button, huh?";
+    });
+    myButton.addEventListener("click", function(event) {
+        var clicked = event.button;
+        if(clicked == 0) {
+            myButton.innerHTML = "I see you clicked with left mouse button. Pfft.. so ordinary";
+        }; 
+    });
+
+    document.body.style.transition = "1s";
+    document.body.style.transitionProperty = "background-color";
+
+    addEventListener("keydown", e => {
+        if (e.keyCode == 66) {
+            document.body.style.background = "linear-gradient(to top, darkblue, blue)";
+            document.body.style.backgroundColor = "rgba(1,1,1,0)";
+        }
+    });
+    addEventListener("keyup", e => {
+        if (e.keyCode == 66) {
+            document.body.style.background = "";
+            document.body.style.backgroundColor = "rgba(255,255,255,1)";
+        }
+    });
+
+    var keylogger = document.querySelector("#keylogger");
+    addEventListener("keypress", e => {
+        // only responds on character keys
+        console.log(String.fromCharCode(e.keyCode), "is a character.");
+        keylogger.innerHTML += String.fromCharCode(e.keyCode);
+    });
+
+    var paintCanvas = document.querySelector("#paint-canvas");
+
+    paintCanvas.addEventListener("mousedown", e => {
+        e.preventDefault();
+        paintCanvas.addEventListener("mousemove", handlePaintCanvas);
+    });
+    
+    paintCanvas.addEventListener("mouseup", e => {
+        paintCanvas.removeEventListener("mousemove", handlePaintCanvas);
+    });
+
+    paintCanvas.addEventListener("touchstart", e => {
+        e.preventDefault();
+        paintCanvas.addEventListener("touchmove", handlePaintCanvasTouch);
+    });
+    
+    paintCanvas.addEventListener("touchend", e => {
+        paintCanvas.removeEventListener("touchmove", handlePaintCanvasTouch);
+    });
+
+    function handlePaintCanvas(e) {
+        var dot = document.createElement("div");
+        dot.className = "dot";
+        dot.style.left = e.pageX - 4 + "px";
+        dot.style.top = e.pageY - 4 + "px";
+        paintCanvas.appendChild(dot);
+    }
+    
+    function handlePaintCanvasTouch(e) {
+        var dot = document.createElement("div");
+        var t = e.changedTouches[0];
+        console.log("x:", t.pageX);
+        console.log("y:", t.pageY);
+        dot.className = "dot";
+        dot.style.left = t.pageX - 4 + "px";
+        dot.style.top = t.pageY - 4 + "px";
+        paintCanvas.appendChild(dot);
+    }
+
+    var draggableBar = document.querySelector("#draggable-bar");
+    var isDragging = false;
+    draggableBar.addEventListener("mousedown", function(e) {
+        e.preventDefault();
+        addEventListener("mousemove", handleBarDrag);
+        isDragging = true;
+    });
+    
+    addEventListener("mouseup", function(e) {
+        e.preventDefault();
+        if (isDragging) {
+            removeEventListener("mousemove", handleBarDrag);
+            isDragging = false;
+        }
+    });
+    
+    function handleBarDrag(e) {
+        var newWidth = e.clientX;
+        draggableBar.style.width = newWidth + "px";
+    }
+
+    var mouseTrackerX = document.querySelector("#mouse-tracker-x");
+    var mouseTrackerY = document.querySelector("#mouse-tracker-y");
+    function handleMouseTracker(event) {
+        mouseTrackerX.style.top = event.pageY;
+        mouseTrackerY.style.left = event.pageX;
+    }
+    
+    window.addEventListener("mousemove", handleMouseTracker);
+
+</script>
+</body>
+
+</html>

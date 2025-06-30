@@ -1,0 +1,1 @@
+Sequential processing is slower but simple and easy to debug. Parallel processing is faster but harder to debug and set up. Sequential is reliable, while parallel is better for big tasks. Distributed computing spreads tasks across multiple systems, making it scalable, fault-tolerant, and reliable. However, it is complex and costly to maintain.

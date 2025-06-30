@@ -1,0 +1,30 @@
+body {
+  cursor: url('https://ionicframework.com/img/finger.png'), auto;
+}
+
+.email-text {
+  font-size: smaller !important;
+  color: grey !important;
+}
+
+.email-body-text {
+  
+}
+
+#green {
+    background-color: #4CAF50;
+    padding:8px;
+}
+
+#red {
+    background-color: #F08080;
+    padding:8px;
+}
+
+#myDIV {
+    display: none;
+}
+
+#myDIV2 {
+    display: none;
+}
