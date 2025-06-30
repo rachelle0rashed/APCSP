@@ -1,0 +1,17 @@
+scene 1: 
+    background-
+    there will be a ghost made with a series of circles, and rectangles.
+    I will make a ghost function for each scene 
+    a Purple ghost is standing there looking for someone
+    
+scene 2: 
+    background-
+    another ghost (pink) will appear next to him 
+    
+scene 3:
+    background-
+    its the same page as scene 2 
+    
+scene 4: 
+    background: 
+    the sky is blue and the ground is green

@@ -1,0 +1,37 @@
+def ghost (x,y, color):
+    head
+    body
+    feet
+    eyes
+    
+
+    
+def scene1():
+    set background
+    add ghost 
+    add text "Hi! What's your and and do you like food?"
+def scene2():
+    set background
+    add ghost 
+    add text "Hi! What's your name, and do you like food."
+    add ghost
+    add text "Hi! My name is Tiana, and I love food."
+    
+def scene3(): 
+    set background 
+    add ghost 
+    add text "Can we be friends?"
+    add ghost 
+    add text "Sure!"
+    
+def scene4():
+    add ghost 
+    add ghost
+    add text ":)"
+    
+scene_counter = 0 
+def draw_next_screen(x,y):
+    global scene_counter
+    scene_counter += 1
+    
+    if scene=

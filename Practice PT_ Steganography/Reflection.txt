@@ -1,0 +1,7 @@
+1. I expect the expected user of my program woud be a spy. The program's design meet thre needs ogf the user because it protects sensitive information.  
+2. The students-created funtion encodes and desodes messages by using sequencing to order steps, checking if numbers and even, and processing each number one at a time. 
+The proceduce encodes and decodes messages by checking if a number is even or odd and changes the value properly to decode the entire messsage.
+pixel_value = [0,0,0] would be the array used in the program, and the three zeros are being stored. 
+This simplifies the process by reducing the number of lines and avoiding the need for extra variables to store each value separately. 
+It will execute 3 times, and an error causing an infinite loop would occur if the array is empty.
+Comparing the array to a letter would cause an error because they are different data types.

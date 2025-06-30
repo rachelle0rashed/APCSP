@@ -1,0 +1,4 @@
+1. The pupose of the program is to entertain the user by looking at two ghost becoming friends.
+In the draw_ghost procedure it goes into different function for example head, body, eyes_looking_l and more all coming together to make a ghost.
+In my draw_ghost procedure it shows sequencing because it executes fuctions one line after another in order resulting into creating a ghost. 
+The first iteration in my code is the in the foot function. The statement will excutes up to 3 times depending on the range. My iter

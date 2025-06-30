@@ -1,0 +1,4 @@
+I already new that code is lines of instructions for the computer to read.
+Something that suprised me is that hardware instutions are represented by zeros and ones. 
+I want to learn more about the repository. 
+How does the circuit work?
