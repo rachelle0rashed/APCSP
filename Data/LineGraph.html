@@ -1,0 +1,39 @@
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+
+
+var data = [3.08, 3.10, 3.13, 3.17, 3.20, 3.22, 3.25];
+
+
+
+var ctx = document.getElementById('myChart').getContext('2d');
+
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'Price of Milk',
+            // Fill in the graph by uncommenting the option below
+            // backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: data
+        }]
+    },
+
+    // Configuration options go here
+    options: {
+        scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: false
+            }
+        }]
+    }
+    }
+});
+</script>

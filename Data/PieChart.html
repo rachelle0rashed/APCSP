@@ -1,0 +1,40 @@
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+
+var data = [20, 25, 21, 11, 16, 11];
+
+
+var ctx = document.getElementById('myChart').getContext('2d');
+
+
+var chart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Cat', 'Dog', 'Hamster', 'Bird', 'Turtle', 'Cat'],
+        datasets: [{
+            data: data,
+            backgroundColor: [
+                'blue',
+                'red',
+                'orange',
+                'purple',
+                'cyan',
+                'green'
+            ],
+            borderColor: [
+                'blue',
+                'red',
+                'orange',
+                'purple',
+                'cyan',
+                'green'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {}
+});
+
+
+</script>

@@ -1,0 +1,1 @@
+An example in my life where I encode infomation was scanning a barncode, the barode on a item or product is a form of encode data that a scanner can read and identify it.

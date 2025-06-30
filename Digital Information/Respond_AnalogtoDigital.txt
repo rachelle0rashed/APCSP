@@ -1,0 +1,17 @@
+1. How is a digital representation of analog data a 
+   form of abstraction?
+   A digital representation of analog data is a form of abstraction because it take thinggs in the real world and make it easier for the computer. 
+   
+   
+   
+2. Why is the quality of the photo, music, etc better 
+   when more samples are taken?
+    It is better because when more samples are taken it will cature the small details. 
+   
+   
+   
+   
+3. Music is an example of analog data. What others 
+   examples of analog data can you think of?
+        Heartrate
+        Temperature

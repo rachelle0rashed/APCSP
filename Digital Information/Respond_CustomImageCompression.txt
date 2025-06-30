@@ -1,0 +1,5 @@
+Write your answers to each question here:
+1. 2 bits are necessary to represent one pixel color.
+2. A new custom encoding could represent each color using 4 bits every component(RGB), with 16 different level per conmponet. Which can lessen the usege each color to 12 bits instead of 24 bits. 
+It can save 12 bits. 
+I would lose quality, if I decompress.

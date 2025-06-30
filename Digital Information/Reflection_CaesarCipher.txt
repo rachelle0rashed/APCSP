@@ -1,0 +1,7 @@
+1. Some advantages of using Caeser chiper is that it will add some security for your data and can be memorize easily. 
+
+2. Some of the disadvantages of using Casar Chiper is that it is easy to decrypt by an uknown person, and that it provided the minimum layer of security 
+
+3. The Ceaser Cipheruses the symmetric encryption model because every letter used in a message is substituted by a new letter. 
+
+4. The maximum number is 25.

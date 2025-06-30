@@ -1,0 +1,11 @@
+1.Which visualization would be the most useful to compare the amount of energy used by each of the five states in a single year? Why? 
+A line chart is the best way to compare the energy used by each of the five states in a single year. It clearly shows the differences in energy use, making it easy to compare the states at a glance.
+
+2. Which visualization would be the most useful to compare the five states’ energy consumption over a range of years? Why?
+A line chart is the best choice to compare energy use across the five states over multiple years. It shows how energy consumption changes over time, making it easy to see trends for each state.
+
+3. Which visualization would be the most useful if you wanted to see a particular region of the USA?
+A map chart is the best choice for seeing a specific region of the USA. It clearly shows energy consumption across different areas, making it easy to spot regional differences.
+
+4. What things do you think each of the graphs explains very clearly? What are some things that each graphs doesn’t explain very well?
+The line graph shows energy consumption trends over time for each state, but it doesn’t show the exact amount of energy used. The bar chart shows which state has the highest energy use, but it doesn’t tell you the year it peaked. The map clearly shows regions with high energy use, but it doesn’t give specific energy amounts for those areas.
